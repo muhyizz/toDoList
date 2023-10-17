@@ -2,28 +2,28 @@ import './styles.css';
 import { Todo } from './todo';
 import { Project } from './project';
 import { Portfolio } from './portfolio';
-import { loadDivPortfolio, populateDivPortfolio } from './portfolioLayout';
+import { loadDivPortfolio, populateDivPortfolio, oneAdditionProject } from './portfolioLayout';
+import { loadInputProject, createProject, displayProjectTask, addProjectTask, addTaskLayout } from './projectLayout';
+
+const onLoadRight = () =>{
+    const right = document.getElementById('right');
+    right.innerHTML='';
+    const welcomePage = document.createElement('div');
+    welcomePage.innerText = "Welcome to Amazing List";
+    right.appendChild(welcomePage);
+};
 
 let taskOne = new Todo('title','description');
 let taskTwo = new Todo('a','description2');
 let listOne = new Project('My list','c','d','e', [taskOne,taskTwo]);
 let listTwo = new Project('Old list','c','d','e', [taskOne,taskTwo]);
 
-console.log(listOne.title);
-console.log(listOne.arr[0].title + " this is get array title");
-
 listOne.title ='new title';
-console.log(listOne.title);
 
 let task3 = new Todo('title3','description');
 
 listOne.addToDO(task3);
-
-console.log(listOne);
-
 listOne.delToDo(task3);
-
-console.log(listOne.arr);
 
 let port1 = new Portfolio;
 
@@ -31,9 +31,6 @@ port1.addProject(listOne);
 port1.addProject(listTwo);
 port1.addProject(listOne);
 
-console.log(port1)
-console.log(port1.array[0].title);
-port1.printProjectName()
 listOne.printToDoDescription()
 
 loadDivPortfolio();
@@ -45,32 +42,50 @@ firstPortfolio.addProject(listTwo);
 firstPortfolio.addProject(listOne);
 firstPortfolio.addProject(listTwo);
 
-firstPortfolio.printProjectName();
+// Start of Program
 populateDivPortfolio(firstPortfolio)
+onLoadRight();
+let projectTitleLock = '';
 
 
-// let render = firstPortfolio.mapProjectName();
+const addProjectButton = document.getElementById('addProject');
+addProjectButton.addEventListener('click',()=>{
+    loadInputProject();
+});
 
-// render.forEach(projectName =>{
-//         let projectDiv = document.createElement('div');
-//         projectDiv.innerText = projectName;
-//         leftPanel.appendChild(projectDiv);
-//     });
+const right = document.getElementById('right');
 
-// render.forEach(projectName =>{
-//     let projectDiv = document.createElement('div');
-//     projectDiv.innerText = projectName;
-//     leftPanel.appendChild(projectDiv);
-// });
+right.addEventListener('click', (event)=>{
+    const target = event.target;
 
-// window.addEventListener('load', () => {
-//     let renders = firstPortfolio.mapProjectName();
-//     render.forEach(projectName =>{
-//         let projectDiv = document.createElement('div');
-//         projectDiv.innerText = projectName;
-//         leftPanel.appendChild(projectDiv);
-//     });
-// })
+    if(target.id ==='addProjectLine'|| target.closest('#addProjectLine')){
+        createProject(event,firstPortfolio);
+        oneAdditionProject(firstPortfolio);
+        onLoadRight();
+    }
+})
 
 
+left.addEventListener('click', (event)=>{
+    let projectList = document.querySelectorAll('.projectList'); 
+    if(event.target.classList.contains('projectList')){
+        projectTitleLock = event.target.innerHTML;
+        displayProjectTask(event.target.innerHTML,firstPortfolio);
+        
+    }
+
+})
+
+right.addEventListener('click', (event)=>{
+    if(event.target.id === 'addTask'){
+        addTaskLayout();
+    }
+})
+
+right.addEventListener('click', (event)=>{
+    if(event.target.id === 'submitTask'){
+        addProjectTask(projectTitleLock,firstPortfolio);
+        displayProjectTask(projectTitleLock,firstPortfolio);
+    }
+})
 

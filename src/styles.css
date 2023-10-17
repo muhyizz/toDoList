@@ -35,3 +35,17 @@ body,html {
 #leftInput{
     background-color: yellow;
 }
+
+#leftPanelProject{
+    display: flex;
+    flex-direction: column;
+    border: 1px red solid;
+}
+
+#leftPanelProject div{
+    border: 1px red solid;
+}
+
+#leftPanelProject div:hover{
+    border: 3px wheat solid;
+}

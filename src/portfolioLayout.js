@@ -9,12 +9,8 @@ export function loadDivPortfolio(){
     leftInput.setAttribute('id','leftInput');
     leftInput.innerHTML = `
         <div>
-            <form>
-                <label for = 'projectName'>New Project :</label>
-                <input type = 'text' id = 'projectName' placeholder = 'new project name' required>
-                <button type="submit" id="add-project">Add Project</button>
-                <button type="submit" id="remove-project">Remove Project</button>
-            </form>
+            <button id="addProject">Add Project</button>
+            <button id="removeProject">Remove Project</button>
         </div>
     `;
 
@@ -26,11 +22,40 @@ export function loadDivPortfolio(){
 
 export function populateDivPortfolio(portFolioName){
     let leftPanel = document.getElementById('left');
+    let leftPanelProject = document.createElement('div');
+    leftPanelProject.setAttribute('id','leftPanelProject');
+
     let renders = portFolioName.mapProjectName();
-    
+
     renders.forEach(projectName =>{
         let projectDiv = document.createElement('div');
+        projectDiv.classList.add('projectList')
         projectDiv.innerText = projectName;
-        leftPanel.appendChild(projectDiv);
+
+        let projectCheckBox = document.createElement('input');
+        projectCheckBox.type = 'checkbox';
+
+        leftPanelProject.appendChild(projectDiv);
+        leftPanelProject.appendChild(projectCheckBox);
     });
+
+    leftPanel.appendChild(leftPanelProject);
+}
+
+export function oneAdditionProject(portFolioName){
+    let leftPanel = document.getElementById('left');
+    let leftPanelProject = document.getElementById('leftPanelProject')
+
+    let projectDiv = document.createElement('div');
+    projectDiv.classList.add('projectList')
+    let renders = portFolioName.mapProjectName();
+    let projectName = renders.slice(-1);
+    projectDiv.innerText = projectName;
+
+    let projectCheckBox = document.createElement('input');
+    projectCheckBox.type = 'checkbox';
+
+    leftPanelProject.appendChild(projectDiv);
+    leftPanelProject.appendChild(projectCheckBox);
+    leftPanel.appendChild(leftPanelProject);
 }
