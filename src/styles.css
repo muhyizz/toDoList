@@ -49,3 +49,12 @@ body,html {
 #leftPanelProject div:hover{
     border: 3px wheat solid;
 }
+
+.projectDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+.projectNameBtn{
+    display: flex;
+}
