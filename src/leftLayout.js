@@ -12,8 +12,12 @@ export function loadDivPortfolio(){
     addProjectBtn.setAttribute('id','addProject');
     addProjectBtn.innerText = "Add Project"
 
-    leftInput.appendChild(addProjectBtn);
+    // const saveProjectBtn = document.createElement('button');
+    // saveProjectBtn.setAttribute('id','saveProject');
+    // saveProjectBtn.innerText = "Save Project"
 
+    leftInput.appendChild(addProjectBtn);
+    // leftInput.appendChild(saveProjectBtn);
     leftPanel.appendChild(leftInput);
 }
 
@@ -24,10 +28,8 @@ export function populateDivPortfolio(portFolioName){
     if (leftPanelProject === null){
         leftPanelProject = document.createElement('div');
         leftPanelProject.setAttribute('id','leftPanelProject');
-        console.log('its null')
     } else {
         leftPanelProject.innerHTML = '';
-        console.log('its not null')
     }
 
     let renders = portFolioName.mapProjectName();
@@ -94,4 +96,9 @@ export function oneAdditionProject(portFolioName){
     projectDiv.appendChild(projectNameBtn);
 
     leftPanelProject.appendChild(projectDiv);
+}
+
+export const deleteProject = (event,projectTitle,portfolio) => {
+    event.preventDefault();
+    portfolio.delProject(projectTitle);    
 }

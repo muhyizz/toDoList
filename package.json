@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js --open",
     "build": "webpack --config webpack.prod.js",
-    "push":"git subtree push --prefix dist origin main",
+    "push": "git subtree push --prefix dist origin main",
     "src-push": "git subtree push --prefix src origin main"
   },
   "keywords": [],
@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "css-loader": "^6.8.1",
+    "date-fns": "^2.30.0",
     "html-webpack-plugin": "^5.5.3",
     "style-loader": "^3.3.3",
     "webpack-dev-server": "^4.15.1",

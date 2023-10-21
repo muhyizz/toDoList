@@ -58,3 +58,11 @@ body,html {
 .projectNameBtn{
     display: flex;
 }
+
+.deleteTask{
+    border:  1px red solid;
+}
+
+.deleteTask:hover{
+    border:  1px white solid;
+}

@@ -10,6 +10,7 @@ export class Portfolio {
     }
 
     delProject(projectName) {
+        
         const currentProjects = this.array.findIndex(project => project.title === projectName.title);
 
         if (currentProjects !== -1) {

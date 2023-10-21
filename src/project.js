@@ -38,6 +38,10 @@ export class Project{
         this._priority = newPriority;
     }
 
+    get priority(){
+        return this._priority;
+    }
+
     get dueDate(){
         return this._dueDate;
     }    
