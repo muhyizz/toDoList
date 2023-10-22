@@ -2,43 +2,25 @@ import './styles.css';
 import { Todo } from './todo';
 import { Project } from './project';
 import { Portfolio } from './portfolio';
+import { loadHeader , loadFooter} from './headerFooter';
 import { loadDivPortfolio, populateDivPortfolio, oneAdditionProject,deleteProject } from './leftLayout';
 import { loadInputProject, createProject, displayProjectTask, addProjectTask, addTaskLayout, onLoadRight, loadProjectEdit, editProject,deleteTask } from './rightLayout';
 
-// let taskOne = new Todo('title','description');
-// let taskTwo = new Todo('a','description2');
-
-// let listOne = new Project('First list','c','d','e', [taskOne,taskTwo]);
-// let listTwo = new Project('Second list','c','d','e', [taskOne,taskTwo]);
-// let listThree = new Project('Third list','c','d','e', [taskOne,taskTwo]);
-// let listFour = new Project('Fourth list','c','d','e', [taskOne,taskTwo]);
-// let listFive = new Project('Fifth list','c','d','e', [taskOne,taskTwo]);
-
-// listOne.title ='new title';
-
-// let task3 = new Todo('title3','description');
-
-// listOne.addToDO(task3);
-// listOne.delToDo(task3);
-
-// listOne.printToDoDescription()
 
 let firstPortfolio = new Portfolio;
-
-// firstPortfolio.addProject(listOne);
-// firstPortfolio.addProject(listTwo);
-// firstPortfolio.addProject(listThree);
-// firstPortfolio.addProject(listFour);
-// firstPortfolio.addProject(listFive);
-// firstPortfolio.delProject(listFive);
-
-// Start of Program
-loadDivPortfolio();
-populateDivPortfolio(firstPortfolio)
-onLoadRight(firstPortfolio);
 let projectTitleLock = '';
 let projectEditLock = '';
 
+const welcome = new Project('Welcome to Amazing List',
+                            'Welcome to Amazing list and enjoy the use',
+                            null, 'High', []);
+firstPortfolio.addProject(welcome);
+
+loadHeader();
+loadFooter();
+loadDivPortfolio();
+populateDivPortfolio(firstPortfolio)
+onLoadRight(firstPortfolio);
 
 const addProjectButton = document.getElementById('addProject');
 addProjectButton.addEventListener('click',()=>{
@@ -147,5 +129,3 @@ right.addEventListener('click', (event)=>{
         displayProjectTask(projectTitleLock,firstPortfolio);
     }
 })
-
-//add done function for task

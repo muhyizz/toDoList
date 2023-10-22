@@ -10,7 +10,8 @@ export const onLoadRight = (portfolio) =>{
     const right = document.getElementById('right');
     right.innerHTML='';
     const welcomePage = document.createElement('div');
-    welcomePage.innerText = "Welcome to Amazing List 1";
+    welcomePage.innerText = "Summary Dashboard";
+    welcomePage.classList.add('dashboardheader')
     
 
     let rightPanelProject = document.getElementById('rightPanelProject')

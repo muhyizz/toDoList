@@ -10,7 +10,7 @@ export function loadDivPortfolio(){
 
     const addProjectBtn = document.createElement('button');
     addProjectBtn.setAttribute('id','addProject');
-    addProjectBtn.innerText = "Add Project"
+    addProjectBtn.innerText = "Project +"
 
     // const saveProjectBtn = document.createElement('button');
     // saveProjectBtn.setAttribute('id','saveProject');
