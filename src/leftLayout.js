@@ -12,12 +12,7 @@ export function loadDivPortfolio(){
     addProjectBtn.setAttribute('id','addProject');
     addProjectBtn.innerText = "Project +"
 
-    // const saveProjectBtn = document.createElement('button');
-    // saveProjectBtn.setAttribute('id','saveProject');
-    // saveProjectBtn.innerText = "Save Project"
-
     leftInput.appendChild(addProjectBtn);
-    // leftInput.appendChild(saveProjectBtn);
     leftPanel.appendChild(leftInput);
 }
 
@@ -47,11 +42,11 @@ export function populateDivPortfolio(portFolioName){
 
         let projectEdit = document.createElement('div');
         projectEdit.classList.add('editProject');
-        projectEdit.innerText = 'E';
+        projectEdit.innerText = 'Edit';
 
         let projectRemove = document.createElement('div');
         projectRemove.classList.add('removeProject');
-        projectRemove.innerText = 'X';
+        projectRemove.innerText = 'Remove';
 
         projectNameBtn.appendChild(projectEdit);
         projectNameBtn.appendChild(projectRemove);
@@ -83,11 +78,11 @@ export function oneAdditionProject(portFolioName){
 
     let projectEdit = document.createElement('div');
     projectEdit.classList.add('editProject');
-    projectEdit.innerText = 'E';
+    projectEdit.innerText = 'Edit';
 
     let projectRemove = document.createElement('div');
     projectRemove.classList.add('removeProject');
-    projectRemove.innerText = 'X';
+    projectRemove.innerText = 'Remove';
 
     projectNameBtn.appendChild(projectEdit);
     projectNameBtn.appendChild(projectRemove);
