@@ -11,7 +11,7 @@ export const onLoadRight = (portfolio) =>{
     right.innerHTML='';
     const welcomePage = document.createElement('div');
     welcomePage.innerText = "Summary Dashboard";
-    welcomePage.classList.add('dashboardheader')
+    welcomePage.classList.add('dashboardHeader')
     
 
     let rightPanelProject = document.getElementById('rightPanelProject')
@@ -72,31 +72,86 @@ export const loadInputProject = () => {
     right.innerHTML = '';
     const rightProjectInput = document.createElement('div');
     rightProjectInput.setAttribute('id','rightProjectInput');
-    rightProjectInput.innerHTML = `
-    <div>
-        <form>
-            <div>
-                <label for="title">Title:</label>
-                <input type="text" id="title" placeholder="Title of the project" required>
 
-                <label for="description">Description:</label>
-                <input type="text" id="description" placeholder="Project Description" required>
+    let form = document.createElement('form');
+    form.setAttribute('id','inputForm');
 
-                <label for="dueDate">Due date:</label>
-                <input type="date" id="dueDate" placeholder="Due Date" required>
+    let formContainer = document.createElement('div');
+    formContainer.setAttribute('id','formContainer');
 
-                <label for="priority">Choose a priority:</label>
-                <select id="priority" name="priority">
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                </select>
-            </div>
-            <button type="submit" id="addProjectLine">Add Project</button>
-            <button type="submit" id="cancelProjectLine">Cancel Project</button>
-        </form>
-    </div>
-    `;
+    let labelTitle = document.createElement('label');
+    labelTitle.htmlFor = 'title';
+    labelTitle.textContent = 'Title: '
+
+    let inputTitle = document.createElement('input');
+    inputTitle.type = 'text';
+    inputTitle.id = 'title'
+    inputTitle.placeholder = 'Title of the project';
+    inputTitle.required = true;
+
+    let labelDescription = document.createElement('label');
+    labelDescription.htmlFor = 'description';
+    labelDescription.textContent = 'Description: '
+
+    let inputDescription = document.createElement('input');
+    inputDescription.type = 'text';
+    inputDescription.id = 'description'
+    inputDescription.placeholder = 'Project Description';
+    inputDescription.required = true;
+
+    let labelDueDate = document.createElement('label');
+    labelDueDate.htmlFor = 'dueDate';
+    labelDueDate.textContent = 'Due Date: '
+
+    let inputDueDate = document.createElement('input');
+    inputDueDate.type = 'date';
+    inputDueDate.id = 'dueDate'
+    inputDueDate.placeholder = 'MM/DD/YYYY';
+    inputDueDate.required = true;
+
+    let labelPriority = document.createElement('label');
+    labelPriority.htmlFor = 'priority';
+    labelPriority.textContent = 'Choose a priority:';
+
+    let selectPriority = document.createElement('select');
+    selectPriority.id = 'priority';
+    selectPriority.name = 'priority';
+    selectPriority.required = true;  // Add the 'required' attribute
+
+    const priorityOptions = ['Low', 'Medium', 'High'];
+
+    priorityOptions.forEach(optionText => {
+    let option = document.createElement('option');
+    option.value = optionText;
+    option.textContent = optionText;
+    selectPriority.appendChild(option);
+    });
+
+    formContainer.appendChild(labelTitle);
+    formContainer.appendChild(inputTitle);
+    formContainer.appendChild(labelDescription);
+    formContainer.appendChild(inputDescription);
+    formContainer.appendChild(labelDueDate);
+    formContainer.appendChild(inputDueDate);
+    formContainer.appendChild(labelPriority);
+    formContainer.appendChild(selectPriority);
+    form.appendChild(formContainer);
+
+    let submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.id = 'addProjectLine';
+    submitButton.innerText = 'Add Project';
+
+    let cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.id = 'cancelProjectLine';
+    cancelButton.innerText = 'Cancel Project';
+
+    form.appendChild(submitButton);
+    form.appendChild(cancelButton);
+
+    rightProjectInput.appendChild(form);
+
     right.appendChild(rightProjectInput);
 }
 
@@ -109,10 +164,16 @@ export const createProject = (event,portfolio) => {
     let descriptionInput = document.getElementById('description');
     let dueDateInput = document.getElementById('dueDate');
     let priorityInput = document.getElementById('priority');
-
+    
     let title = titleInput.value;
     let description = descriptionInput.value;
-    let dueDate = format(parseISO(dueDateInput.value), 'dd/MM/yyyy');
+    let dueDate = dueDateInput.value;
+    if (dueDate === null || dueDate === undefined || dueDate === "") {
+        dueDate = 'N/A';
+    } else {
+        dueDate = format(parseISO(dueDateInput.value), 'dd/MM/yyyy');
+    }
+
     let priority = priorityInput.value;
     
     title = new Project(title,description,dueDate,priority,[]);
@@ -124,31 +185,86 @@ export const loadProjectEdit = () => {
     right.innerHTML = '';
     const rightProjectInput = document.createElement('div');
     rightProjectInput.setAttribute('id','rightProjectInput');
-    rightProjectInput.innerHTML = `
-    <div>
-        <form>
-            <div>
-                <label for="title">Title:</label>
-                <input type="text" id="title" placeholder="Title of the project" required>
 
-                <label for="description">Description:</label>
-                <input type="text" id="description" placeholder="Project Description" required>
+    let form = document.createElement('form');
+    form.setAttribute('id','editForm');
 
-                <label for="dueDate">Due date:</label>
-                <input type="date" id="dueDate" placeholder="Due Date" required>
+    let formContainer = document.createElement('div');
+    formContainer.setAttribute('id','editContainer');
 
-                <label for="priority">Choose a priority:</label>
-                <select id="priority" name="priority">
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                </select>
-            </div>
-            <button type="submit" id="editProjectLine">Edit Project</button>
-            <button type="submit" id="cancelEditProjectLine">Cancel Edit</button>
-        </form>
-    </div>
-    `;
+    let labelTitle = document.createElement('label');
+    labelTitle.htmlFor = 'title';
+    labelTitle.textContent = 'Title: '
+
+    let inputTitle = document.createElement('input');
+    inputTitle.type = 'text';
+    inputTitle.id = 'title'
+    inputTitle.placeholder = 'Title of the project';
+    inputTitle.required = true;
+
+    let labelDescription = document.createElement('label');
+    labelDescription.htmlFor = 'description';
+    labelDescription.textContent = 'Description: '
+
+    let inputDescription = document.createElement('input');
+    inputDescription.type = 'text';
+    inputDescription.id = 'description'
+    inputDescription.placeholder = 'Project Description';
+    inputDescription.required = true;
+
+    let labelDueDate = document.createElement('label');
+    labelDueDate.htmlFor = 'dueDate';
+    labelDueDate.textContent = 'Due Date: '
+
+    let inputDueDate = document.createElement('input');
+    inputDueDate.type = 'date';
+    inputDueDate.id = 'dueDate'
+    inputDueDate.placeholder = 'MM/DD/YYYY';
+    inputDueDate.required = true;
+
+    let labelPriority = document.createElement('label');
+    labelPriority.htmlFor = 'priority';
+    labelPriority.textContent = 'Choose a priority:';
+
+    let selectPriority = document.createElement('select');
+    selectPriority.id = 'priority';
+    selectPriority.name = 'priority';
+    selectPriority.required = true;  // Add the 'required' attribute
+
+    const priorityOptions = ['Low', 'Medium', 'High'];
+
+    priorityOptions.forEach(optionText => {
+    let option = document.createElement('option');
+    option.value = optionText;
+    option.textContent = optionText;
+    selectPriority.appendChild(option);
+    });
+
+    formContainer.appendChild(labelTitle);
+    formContainer.appendChild(inputTitle);
+    formContainer.appendChild(labelDescription);
+    formContainer.appendChild(inputDescription);
+    formContainer.appendChild(labelDueDate);
+    formContainer.appendChild(inputDueDate);
+    formContainer.appendChild(labelPriority);
+    formContainer.appendChild(selectPriority);
+    form.appendChild(formContainer);
+
+    let submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.id = 'editProjectLine';
+    submitButton.innerText = 'Edit Project';
+
+    let cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.id = 'cancelEditProjectLine';
+    cancelButton.innerText = 'Cancel Edit';
+
+    form.appendChild(submitButton);
+    form.appendChild(cancelButton);
+
+    rightProjectInput.appendChild(form);
+
     right.appendChild(rightProjectInput);
 }
 
@@ -164,8 +280,19 @@ export const editProject = (event,projectTitle,portfolio) => {
     let priorityInput = document.getElementById('priority');
 
     let newTitle = titleInput.value;
+    if (newTitle === ''){
+        alert('require title');
+        loadProjectEdit();
+        return;
+    }
     let newDescription = descriptionInput.value;
-    let newDueDate = format(parseISO(dueDateInput.value), 'dd/MM/yyyy');
+    let newDueDate = dueDateInput.value;
+    if (newDueDate === null || newDueDate === undefined || newDueDate === "") {
+        newDueDate = 'N/A';
+    } else {
+        newDueDate = format(parseISO(dueDateInput.value), 'dd/MM/yyyy');
+    }
+
     let newPriority = priorityInput.value;
 
     portfolio.array[projectIndex].title = newTitle;   
@@ -179,7 +306,7 @@ export const displayProjectTask = (title,portfolio) => {
     const right = document.getElementById('right');
     right.innerHTML = '';
     right.innerHTML = `
-        <div>
+        <div id = 'taskTab'>
             <button id="addTask">Add Task</button>
             <button id="backTask">Cancel</button>
         </div>
@@ -196,24 +323,39 @@ export const displayProjectTask = (title,portfolio) => {
         let parentDiv = document.createElement('div');
         parentDiv.classList.add('taskDiv');
 
+        let taskTitle = document.createElement('div');
+        taskTitle.innerText = 'Tittle'
+
         let taskDiv = document.createElement('div');
         taskDiv.innerText = element.title;
+        taskDiv.classList.add('taskTittle');
+
+        let taskDescription = document.createElement('div');
+        taskDescription.innerText = 'To do Description'
 
         let descriptionDiv = document.createElement('div');
         descriptionDiv.innerText = element.description;
+        descriptionDiv.classList.add('descriptionDiv');
+
+        let buttonDiv = document.createElement('div');
+        buttonDiv.classList.add('taskButton');
 
         let deleteTask = document.createElement('div');
-        deleteTask.innerText = 'X';
+        deleteTask.innerText = 'Delete';
         deleteTask.classList.add('deleteTask');
 
         let doneTask = document.createElement('div');
-        doneTask.innerText = '/';
+        doneTask.innerText = 'Done';
         doneTask.classList.add('doneTask');
-        
+
+        buttonDiv.appendChild(deleteTask);
+        buttonDiv.appendChild(doneTask);
+
+        parentDiv.appendChild(taskTitle);
         parentDiv.appendChild(taskDiv);
+        parentDiv.appendChild(taskDescription);
         parentDiv.appendChild(descriptionDiv);
-        parentDiv.appendChild(deleteTask);
-        parentDiv.appendChild(doneTask);
+        parentDiv.appendChild(buttonDiv);
         taskCollection.appendChild(parentDiv);
     });
 
@@ -222,14 +364,15 @@ export const displayProjectTask = (title,portfolio) => {
 
 export const addTaskLayout = () => {
     const right = document.getElementById('right');
-    const addTask = document.getElementById('addTask');
     right.innerHTML = '';
 
     const taskTittleDiv =document.createElement('div');
+    taskTittleDiv.setAttribute('id','taskTitleDiv');
 
     const taskTitleLabel = document.createElement('label');
     taskTitleLabel.innerText = 'Task Tittle: '
     taskTitleLabel.setAttribute('for', 'taskTitleInput');
+    taskTitleLabel.required = true;
 
     const taskTittleInput = document.createElement('input');
     taskTittleInput.setAttribute('id','taskTitleInput')
