@@ -2,6 +2,7 @@
 
 :root{
     --yellow:#FED41D;
+    --light_yellow:#f5e291;
     --red: #F14E28;
     --blue: #009DDC;
     --white: #FFFFFF;    
@@ -51,10 +52,15 @@ body,html {
 
 #left{
     max-height: 50%;
-    min-height: 10%;
+    min-height: 5%;
     width: 100%;
 
     background-color: var(--red);
+    overflow: scroll;
+}
+
+#left::-webkit-scrollbar{
+    display: none;
 }
 
 #leftInput button{
@@ -95,7 +101,7 @@ body,html {
 }
 
 #leftPanelProject div:hover{
-    border: 3px wheat solid;
+    border: 3px var(--white) solid;
 }
 
 
@@ -110,6 +116,7 @@ body,html {
 
 .projectNameBtn{
     display: flex;
+    gap: 5px;
 }
 
 #right{
@@ -121,28 +128,183 @@ body,html {
     align-items: center;
     justify-content: start;
     gap: 1rem;
-    margin-top: 5px;
 
     background-color: var(--blue);
 
-    overflow: hidden;
-
-    border: 1px red solid;
+    overflow: scroll;
 }
 
-.dashboardheader{
-    background-color: wheat;
+#right::-webkit-scrollbar{
+    display: none;
+}
+
+.dashboardHeader{
     width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+#rightPanelProject{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+#main-table{
+    width: 100%;
+}
+
+#main-table th, td {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
     text-align: center;
 }
 
-.deleteTask{
-    border:  1px red solid;
+#main-table th{
+    text-transform: uppercase;
 }
 
-.deleteTask:hover{
-    border:  1px white solid;
+#main-table td{
+    overflow: hidden;
 }
+
+
+#taskTab{
+    width: 100%;
+    display: flex;
+}
+
+#addTask, #backTask{
+    width: 50%;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+#addTask:hover, #backTask:hover{
+    border: 1px var(--white) solid;
+}
+
+#taskCollection{
+    width: 80%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns : repeat(auto-fit, minmax(200px,300px));
+    align-content: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.taskDiv{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--yellow);
+    box-shadow: 4px 4px 2px 2px black;
+
+}
+
+.taskDiv:hover{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--light_yellow);
+}
+
+.taskButton{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.deleteTask, .doneTask{
+    width: 50%;
+    text-align: center;
+}
+
+.deleteTask:hover, .doneTask:hover {
+    border: 1px solid var(--red);
+}
+
+#rightProjectInput{
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+#inputForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#formContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+#formContainer label{
+    text-align: center;
+}
+
+#formContainer label, #formContainer input, #formContainer select{
+    width: 40%;
+}
+
+#inputForm button{
+    width: 50%;
+}
+
+#editForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#editContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+#editContainer label{
+    text-align: center;
+}
+
+#editContainer label, #editContainer input, #editContainer select{
+    width: 40%;
+}
+
+#editForm button{
+    width: 50%;
+}
+
+#taskTitleDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+#taskTitleDiv label, #taskTitleDiv input, #taskTitleDiv button{
+    width: 100%;
+}
+/* #inputForm label, #inputForm input{
+    width: 50%;
+} */
 
 #footer{
     background-color: black;
@@ -153,6 +315,11 @@ body,html {
     width: 100%;
     text-align: center;
 }
+
+.line-through{
+    text-decoration: line-through 2px rgb(0, 0, 0, 0.5);
+}
+
 
 @media screen and (max-width: 375px) {
     #header{
