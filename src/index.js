@@ -60,13 +60,6 @@ left.addEventListener('click', (event)=>{
 
 })
 
-// left.addEventListener('click', (event)=>{
-//     if(event.target.id === 'saveProject'){
-//        localStorage.Portfolio = firstPortfolio;
-//     }
-
-// })
-
 const right = document.getElementById('right');
 
 right.addEventListener('click', (event)=>{
@@ -124,8 +117,27 @@ right.addEventListener('click', (event)=>{
 right.addEventListener('click', (event)=>{
     if(event.target.classList.contains('deleteTask') ){
         
-        let targetedTask = event.target.previousElementSibling.previousElementSibling.innerText;
+        let targetedTask = event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
         deleteTask(targetedTask,firstPortfolio, projectTitleLock);        
         displayProjectTask(projectTitleLock,firstPortfolio);
     }
 })
+
+// let doneTask = document.querySelectorAll('.doneTask')
+
+// doneTask.forEach(item => {
+//     item.addEventListener('click', function() {
+//         let targetedTask = item.parentElement.previousElementSibling.previousElementSibling.previousElementSibling;
+//         item.classList.toggle('line-through');
+//     });
+// });
+
+// Add click event listener to elements with the 'doneTask' class
+document.getElementById('right').addEventListener('click', (event) => {
+    if (event.target.classList.contains('doneTask')) {
+        let targetedTask = event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling;
+        let targetedDescription = event.target.parentElement.previousElementSibling
+        targetedTask.classList.toggle('line-through');
+        targetedDescription.classList.toggle('line-through');
+    }
+});
